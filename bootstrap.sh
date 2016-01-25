@@ -15,6 +15,7 @@ sudo npm install -g npm@3.3.12 # Latest version of npm is buggy (https://github.
 sudo npm install -g gulp
 sudo npm install -g webpack
 sudo npm install -g nodemon
+sudo npm install -g redis-commander
 
 # install unison from source
 cd ~
@@ -42,6 +43,7 @@ sudo chmod 777 /il
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --zone=public --permanent --add-port=3000/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=8081/tcp
 
 # These units will be started if not running or restart if running
 sudo systemctl restart firewalld
