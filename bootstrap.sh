@@ -2,7 +2,7 @@
 #install packages
 sudo curl --silent --location https://rpm.nodesource.com/setup | bash -
 #Add repo for nginx, for some reason yum's base package is broked
-rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+#rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 #sudo yum -y update
 sudo yum -y install epel-release git nodejs perf iproute2 psmisc
 sudo yum -y groupinstall 'Development Tools'
@@ -10,8 +10,8 @@ sudo yum -y install ctags ctags-etags
 #sudo yum -y install nginx
 sudo yum -y install vim
 sudo npm install -g n
-sudo n 5.2 # Install the version of node we're currently using
-sudo npm install -g npm@3.3.12 # Latest version of npm is buggy (https://github.com/npm/npm/issues/10492)
+sudo n 5.2
+sudo npm install -g npm@3.5.3
 sudo npm install -g gulp
 sudo npm install -g webpack
 sudo npm install -g nodemon
@@ -43,6 +43,7 @@ sudo chmod 777 /il
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --zone=public --permanent --add-port=3000/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=3001/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8081/tcp
 
 # These units will be started if not running or restart if running

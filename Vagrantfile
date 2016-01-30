@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
   end
   config.vm.network "private_network", ip: "192.168.20.20"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3001, host: 3001
   config.vm.network "forwarded_port", guest: 8081, host: 8081
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.ssh.forward_agent = true
