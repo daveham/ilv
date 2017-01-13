@@ -10,11 +10,12 @@ sudo yum -y install ctags ctags-etags
 #sudo yum -y install nginx
 sudo yum -y install vim
 sudo npm install -g n
-sudo n 5.2
-sudo npm install -g npm@3.5.3
+sudo n 6.3
+sudo npm install -g npm
 sudo npm install -g gulp
 sudo npm install -g webpack
 sudo npm install -g nodemon
+sudo npm install -g mocha
 sudo npm install -g redis-commander
 
 # install unison from source
@@ -23,7 +24,7 @@ wget http://download.opensuse.org/repositories/home:ocaml/CentOS_7/home:ocaml.re
 sudo mv home:ocaml.repo /etc/yum.repos.d/
 sudo yum -y install ocaml
 
-wget http://www.seas.upenn.edu/~bcpierce/unison/download/releases/stable/unison-2.48.3.tar.gz
+wget http://www.seas.upenn.edu/~bcpierce/unison/download/releases/unison-2.48.3/unison-2.48.3.tar.gz
 tar xvfz unison-2.48.3.tar.gz
 cd unison-2.48.3
 make
@@ -40,10 +41,16 @@ sudo echo "Defaults:vagrant env_keep=HOME" >> /etc/sudoers.d/10_vagrant
 sudo mkdir /il
 sudo chmod 777 /il
 
+# Use local dot files if they exist
+for file in /.{bash_profile,bash_prompt}; do
+    cp -f /vagrant/vagrantfiles/"$file"   /home/vagrant
+done;
+
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --zone=public --permanent --add-port=3000/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=3001/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=4443/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8081/tcp
 
 # These units will be started if not running or restart if running
@@ -56,3 +63,6 @@ sudo systemctl restart redis.service
 sudo systemctl enable redis.service
 
 sudo /opt/VBoxGuestAdditions-*/init/vboxadd setup
+
+# Add custom environment variable to .bashrc
+echo 'export VAGRANT_BOX=true' >> /home/vagrant/.bashrc
